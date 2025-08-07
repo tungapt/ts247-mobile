@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang chủ Tuyển Sinh 247</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style>
+    body,html{font-size:14px}
+  body{margin:0;font-family:Roboto,Arial,sans-serif;background:#f4fbfe}
+  .main-wrapper.menu-open{overflow-x:hidden}
+  .header-top{display:flex;align-items:center;justify-content:space-between;background:#eaf6ff;padding:8px 16px 6px 16px}
+  .header-top-left .logo{height:40px}
+  .header-top-right{display:flex;align-items:center;gap:8px}
+  .header-profile{display:flex;align-items:center;background:#ffe9b3;border-radius:50%;padding:3px}
+  .header-profile img{width:28px;height:28px;border-radius:50%}
+  .profile-text{font-size:14px;font-weight:500;color:#222;margin-left:2px}
+  .header-bottom{display:flex;align-items:center;justify-content:space-between;background:#fff;padding:7px 16px 7px 8px;box-shadow:0 2px 4px rgba(0,0,0,.03);position:relative;z-index:2}
+  .header-bottom-left{display:flex;align-items:center}
+  .menu-btn{width:36px;height:36px;background:0 0;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
+  .menu-icon{width:24px;height:24px;display:flex;flex-direction:column;justify-content:space-between}
+  .menu-icon span{display:block;height:3px;width:100%;background:#222;border-radius:2px;transition:.3s}
+  .header-bottom-right{display:flex;align-items:center;gap:16px}
+  .header-icon{display:flex;align-items:center;gap:4px;font-size:14px;color:#222;text-decoration:none;background:0 0;border:none;cursor:pointer;position:relative}
+  .header-icon img{width:22px;height:22px}
+  .banner{background:no-repeat url(img/banner.png);background-size: 100%;text-align:center;padding:32px 16px 24px 16px}
+  .banner-title{color:#fff;font-size:28px;font-weight:700;margin-bottom:16px;letter-spacing:1px}
+  .banner-btn{background:#fff;color:#2196f3;border:none;border-radius:24px;padding:10px 32px;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(33,150,243,.08);transition:background .2s}
+  .banner-btn:hover{background:#e3f2fd}
+  .main-content{padding:16px 8px 0 8px;max-width:480px;margin:0 auto}
+  .course-box{background:#eaf5ff;border-radius:10px;padding:20px 16px 24px 16px;margin-bottom:24px}
+  .course-title,.sidebar-title{font-size:18px;font-weight:700;color:#222}
+  .course-desc,.sidebar .course-desc{font-size:14px;color:#888;margin-bottom:16px}
+  .course-list{list-style:none;padding:0;margin:0}
+  .course-item,.menu-item{display:flex;align-items:center;justify-content:flex-start;font-size:16px;font-weight:700;color:#222;padding:8px 0 8px 0;position:relative;cursor:pointer;user-select:none;background:0 0}
+  .course-item .course-arrow{transition:transform .2s}
+  .course-item.open .course-arrow{transform:rotate(-90deg)}
+  .course-label,.menu-label{flex:1;font-weight:700;color:#222;margin-right:8px}
+  .course-badge,.menu-badge{font-size:11px;font-weight:700;border-radius:10px;padding:2px 10px;margin-right:6px;color:#fff;display:inline-block;text-align:center;line-height:16px;min-width:22px;}
+  .course-badge.hot{background:#ff3b3b}
+  .course-badge.new{background:#1ecb4f}
+  .course-arrow{width:12px;height:12px;font-size:15px;color:#222;margin-left:0;margin-right:0;display:inline-block;vertical-align:middle;transition:transform .2s}
+  .course-arrow img{width:100%;height:100%;display:block;}
+  .course-sub-list{display:none;margin-left:0;margin-top:0;border-left:2px dotted #d3d3d3;padding-left:16px;padding-bottom:4px;background:0 0;list-style:none}
+  .course-sub-list.open{display:block;animation:fadeInSub .25s}
+  .course-sub-item,.menu-sub-item{display:flex;align-items:center;font-size:14px;color:#888;margin-bottom:8px;margin-top:2px}
+  .plus{font-size:16px;color:#bbb;margin-right:6px}
+  .sub-label{color:#444;font-size:14px;font-weight:400}
+  .link{font-size:15px;color:#bbb;margin-right:6px}
+  .sub-link{color:#444;font-size:14px;font-weight:400}
+  .link-blue{color:#2196f3;text-decoration:none}
+  .sidebar{position:fixed;top:0;left:0;width:80vw;max-width:340px;height:100vh;background:#fff;z-index:100;transform:translateX(-100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+  .sidebar.open{transform:translateX(0)}
+  .sidebar-header{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 8px 18px;border-bottom:1px solid #e0e7ef}
+  .sidebar-title{font-size:17px;font-weight:700;color:#222}
+  .sidebar-close{background:0 0;border:none;font-size:26px;color:#222;cursor:pointer;line-height:1}
+  .sidebar-content{
+    padding:12px 18px 0 18px;flex:1;overflow-y:auto;max-height:100vh;
+  }
+  .sidebar-bg{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,.18);z-index:99;opacity:0;pointer-events:none;transition:opacity .3s}
+  .sidebar-bg.open{opacity:1;pointer-events:auto}
+  .menu-list{list-style:none;padding:0;margin:0}
+  .menu-item{display:flex;align-items:center;justify-content:flex-start;font-size:16px;font-weight:700;color:#222;padding:8px 0 8px 0;border-bottom:none;position:relative;cursor:pointer;user-select:none}
+  .menu-item .menu-arrow{transition:transform .2s}
+  .menu-item.open .menu-arrow{transform:rotate(-90deg)}
+  .menu-label{flex:1;font-weight:700;color:#222;margin-right:8px}
+  .menu-badge{font-size:11px;font-weight:700;border-radius:10px;padding:2px 10px;margin-right:6px;color:#fff;display:inline-block;text-align:center;line-height:16px;min-width:22px;}
+  .menu-badge.hot{background:#ff3b3b}
+  .menu-badge.new{background:#1ecb4f}
+  .menu-arrow{width:12px;height:12px;font-size:15px;color:#222;margin-left:0;margin-right:0;display:inline-block;vertical-align:middle;transition:transform .2s}
+  .menu-arrow img{width:100%;height:100%;display:block;}
+  .menu-sub-list{display:none;margin-left:0;margin-top:0;border-left:2px dotted #d3d3d3;padding-left:16px;padding-bottom:4px;background:0 0;list-style:none}
+  .menu-sub-list.open{display:block;animation:fadeInSub .25s}
+  @keyframes fadeInSub{
+  from{opacity:0;transform:translateY(-6px)}
+  to{opacity:1;transform:translateY(0)}
+  }
+  .menu-sub-item{display:flex;align-items:center;font-size:14px;color:#888;margin-bottom:8px;margin-top:2px}
+  .plus{font-size:16px;color:#bbb;margin-right:6px}
+  .sub-label{color:#444;font-size:14px;font-weight:400}
+  .link{font-size:15px;color:#bbb;margin-right:6px}
+  .sub-link{color:#444;font-size:14px;font-weight:400}
+  @media (min-width:600px){
+  .main-content{max-width:420px}
+  .sidebar{max-width:320px}
+  }
+</style>
+</head>
+<body>
+  <div class="main-wrapper">
+    <!-- Sidebar background overlay -->
+    <div class="sidebar-bg" id="sidebarBg"></div>
+    <!-- Sidebar menu -->
+    <aside class="sidebar" id="sidebarMenu">
+      <div class="sidebar-header">
+        <div>
+          <div class="sidebar-title">CHỌN KHÓA HỌC</div>
+          <div class="course-desc" style="margin:0;">Khóa học từ lớp 1 - 12 năm 2026</div>
+        </div>
+        <button class="sidebar-close" id="sidebarClose">&times;</button>
+      </div>
+      <div class="sidebar-content">
+        <ul class="menu-list">
+          <li class="menu-item has-sub" data-menu="chon-khoa-hoc">
+            <span class="menu-label">Khóa học</span>
+            <span class="menu-arrow"><img src="img/down-arrow.png" width="18" height="18" alt="Chevron" /></span>
+          </li>
+          <ul class="menu-sub-list" data-menu="chon-khoa-hoc">
+            <li class="menu-item has-sub" data-menu="onluyen">
+              <span class="menu-label">Ôn luyện ĐGTD, ĐGNL</span>
+              <span class="menu-badge hot">HOT</span>
+              <span class="menu-arrow"><img src="img/down-arrow.png" width="18" height="18" alt="Chevron" /></span>
+            </li>
+            <ul class="menu-sub-list" data-menu="onluyen">
+              <li class="menu-sub-item">
+                <span class="link"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2196f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 1 7 7l-1 1a5 5 0 0 1-7-7"/><path d="M14 11a5 5 0 0 0-7-7l-1 1a5 5 0 0 0 7 7"/></svg></span> <span class="sub-label">ĐGNL Hà Nội</span>
+              </li>
+            </ul>
+            <li class="menu-item has-sub" data-menu="lop12">
+              <span class="menu-label">Lớp 12</span>
+              <span class="menu-badge new">NEW</span>
+              <span class="menu-arrow"><img src="img/down-arrow.png" width="18" height="18" alt="Chevron" /></span>
+            </li>
+            <ul class="menu-sub-list" data-menu="lop12">
+              <li class="menu-sub-item">
+                <span class="link"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2196f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 1 7 7l-1 1a5 5 0 0 1-7-7"/><path d="M14 11a5 5 0 0 0-7-7l-1 1a5 5 0 0 0 7 7"/></svg></span> <span class="sub-label">Môn Toán</span>
+              </li>
+              <li class="menu-sub-item">
+                <span class="link"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2196f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 1 7 7l-1 1a5 5 0 0 1-7-7"/><path d="M14 11a5 5 0 0 0-7-7l-1 1a5 5 0 0 0 7 7"/></svg></span> <span class="sub-label">Môn Văn</span>
+              </li>
+            </ul>
+          </ul>
+          <li class="menu-item">
+            <span class="menu-label">Sách</span>
+          </li>
+          <li class="menu-item">
+            <span class="menu-label">Giáo viên</span>
+          </li>
+          <li class="menu-item has-sub" data-menu="hocthu">
+            <span class="menu-label">Học thử miễn phí</span>
+            <span class="menu-arrow"><img src="img/down-arrow.png" width="18" height="18" alt="Chevron" /></span>
+          </li>
+          <ul class="menu-sub-list" data-menu="hocthu">
+            <li class="menu-sub-item">
+              <span class="link"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2196f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 1 7 7l-1 1a5 5 0 0 1-7-7"/><path d="M14 11a5 5 0 0 0-7-7l-1 1a5 5 0 0 0 7 7"/></svg></span> <span class="sub-label">Lớp 12</span>
+            </li>
+            <li class="menu-sub-item">
+              <span class="link"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2196f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 1 7 7l-1 1a5 5 0 0 1-7-7"/><path d="M14 11a5 5 0 0 0-7-7l-1 1a5 5 0 0 0 7 7"/></svg></span> <span class="sub-label">Lớp 11</span>
+            </li>
+          </ul>
+          <li class="menu-item">
+            <span class="menu-label">Thông báo</span>
+          </li>
+          <li class="menu-item">
+            <span class="menu-label">Nạp tiền</span>
+          </li>
+          <li class="menu-item">
+            <span class="menu-label">Mã kích hoạt</span>
+          </li>
+        </ul>
+      </div>
+    </aside>
+    <!-- Header mới tách 2 dòng -->
+    <header class="header-top">
+      <div class="header-top-left">
+        <img src="img/logo.png" alt="Tuyển Sinh 247" class="logo">
+      </div>
+      <div class="header-top-right">
+        <span class="header-profile">
+          <img src="img/user.png" width="28" height="28" alt="Avatar" />
+        </span>
+        <span class="profile-text">Trang cá nhân</span>
+      </div>
+    </header>
+    <header class="header-bottom">
+      <div class="header-bottom-left">
+        <button class="menu-btn" id="menuBtn" aria-label="Mở menu">
+          <img src="img/menu.png" width="24" height="24" alt="Menu" />
+        </button>
+      </div>
+      <div class="header-bottom-right">
+        <button class="header-icon" aria-label="Giỏ hàng">
+          <!-- Cart SVG -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          Giỏ hàng
+        </button>
+        <button class="header-icon" aria-label="Mã kích hoạt">
+          <!-- QR Code SVG -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M7 17v.01M3 14h4a1 1 0 0 1 1 1v4"/></svg>
+          Mã kích hoạt
+        </button>
+      </div>
+    </header>
+    <!-- Banner -->
+    <section class="banner">
+      <div class="banner-title">HỌC TRỰC TUYẾN<br>HIỆU QUẢ - TIẾT KIỆM</div>
+      <button class="banner-btn">Đăng ký ngay</button>
+    </section>
+    <!-- Main content -->
+    <div class="main-content">
+      <div class="course-box">
+        <div class="course-title">CHỌN KHÓA HỌC</div>
+        <div class="course-desc">Khóa học từ lớp 1 - 12 năm 2026</div>
+        <ul class="course-list">
+          <li class="course-item has-sub" data-course="onluyen">
+            <span class="course-label">Ôn luyện ĐGTD, ĐGNL</span>
+            <span class="course-badge hot">HOT</span>
+            <span class="course-arrow"><img src="img/down-arrow.png" width="18" height="18" alt="Chevron" /></span>
+          </li>
+          <ul class="course-sub-list" data-course="onluyen">
+            <li class="course-sub-item">
+              <span class="link"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2196f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 1 7 7l-1 1a5 5 0 0 1-7-7"/><path d="M14 11a5 5 0 0 0-7-7l-1 1a5 5 0 0 0 7 7"/></svg></span> <span class="sub-label">ĐGNL Hà Nội</span>
+            </li>
+          </ul>
+          <li class="course-item has-sub" data-course="lop12">
+            <span class="course-label">Lớp 12</span>
+            <span class="course-badge new">NEW</span>
+            <span class="course-arrow"><img src="img/down-arrow.png" width="18" height="18" alt="Chevron" /></span>
+          </li>
+          <ul class="course-sub-list" data-course="lop12">
+            <li class="course-sub-item">
+              <span class="link"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2196f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 1 7 7l-1 1a5 5 0 0 1-7-7"/><path d="M14 11a5 5 0 0 0-7-7l-1 1a5 5 0 0 0 7 7"/></svg></span> <span class="sub-label">Môn Toán</span>
+            </li>
+            <li class="course-sub-item">
+              <span class="link"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2196f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 1 7 7l-1 1a5 5 0 0 1-7-7"/><path d="M14 11a5 5 0 0 0-7-7l-1 1a5 5 0 0 0 7 7"/></svg></span> <span class="sub-label">Môn Văn</span>
+            </li>
+          </ul>
+          <li class="course-item has-sub" data-course="hocthu">
+            <span class="course-label">Học thử miễn phí</span>
+            <span class="course-badge new">NEW</span>
+            <span class="course-arrow"><img src="img/down-arrow.png" width="18" height="18" alt="Chevron" /></span>
+          </li>
+          <ul class="course-sub-list" data-course="hocthu">
+            <li class="course-sub-item">
+              <span class="link"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2196f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 1 7 7l-1 1a5 5 0 0 1-7-7"/><path d="M14 11a5 5 0 0 0-7-7l-1 1a5 5 0 0 0 7 7"/></svg></span> <span class="sub-label">Lớp 12</span>
+            </li>
+            <li class="course-sub-item">
+              <span class="link"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2196f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 1 7 7l-1 1a5 5 0 0 1-7-7"/><path d="M14 11a5 5 0 0 0-7-7l-1 1a5 5 0 0 0 7 7"/></svg></span> <span class="sub-label">Lớp 11</span>
+            </li>
+          </ul>
+          <li class="course-item">
+            <span class="course-label">Thông báo</span>
+          </li>
+          <li class="course-item">
+            <span class="course-label">Nạp tiền</span>
+          </li>
+          <li class="course-item">
+            <span class="course-label">Mã kích hoạt</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(function() {
+      $('#menuBtn').on('click', function() {
+        $('#sidebarMenu').addClass('open');
+        $('#sidebarBg').addClass('open');
+        $('.main-wrapper').addClass('menu-open');
+      });
+      $('#sidebarClose, #sidebarBg').on('click', function() {
+        $('#sidebarMenu').removeClass('open');
+        $('#sidebarBg').removeClass('open');
+        $('.main-wrapper').removeClass('menu-open');
+      });
+      // Toggle submenu cho menu trái
+      $('.menu-item.has-sub').on('click', function() {
+        var menu = $(this).data('menu');
+        $(this).toggleClass('open');
+        var $sub = $('.menu-sub-list[data-menu="' + menu + '"]');
+        $sub.toggleClass('open');
+      });
+      // Toggle submenu cho menu chính
+      $('.course-item.has-sub').on('click', function() {
+        var course = $(this).data('course');
+        $(this).toggleClass('open');
+        var $sub = $('.course-sub-list[data-course="' + course + '"]');
+        $sub.toggleClass('open');
+      });
+    });
+  </script>
+</body>
+</html> 
